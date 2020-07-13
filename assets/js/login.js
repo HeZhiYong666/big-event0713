@@ -46,7 +46,7 @@ form.verify({
         // 形参val表示使用此验证规则的输入框的值，简单来说，就是我们填写的值
         // 案例中，密码框使用了这个验证规则，形参val表示我们输入的密码
         if (!/^\S{6,12}$/.test(val)) {
-            return '密码长度不行，请改正';
+            return '最小长度为6位数,最大长度12位数';
         }
         // return '验证不通过的提示';
     },
@@ -54,9 +54,31 @@ form.verify({
     same: function(val) {
         // 这个验证规则，重复密码使用；所以val表示重复密码
         // 获取密码
-        var pwd = $('input[name=password]').val();
+        var pwd = $('#register input[name=password]').val();
         if (pwd !== val) {
             return '两次密码不一致'
         }
     }
 });
+
+
+// -----------------------  完成登录功能 ----------------------
+// 监听表单提交事件--阻止默认行为--收集表单数据--ajax提交给接口
+$('#login form').on('submit', function(e) {
+    e.preventDefault();
+    var data = $(this).serialize();
+    $.ajax({
+        type: 'POST',
+        url: 'http://www.liulongbin.top:3007/api/login',
+        data: data,
+        success: function(res) {
+            layer.msg(res.message);
+            if (res.status === 0) {
+                // 把token保存到本地
+                localStorage.setItem('token', res.token);
+                // 登录成功,跳转到首页
+                location.href = '/index.html'
+            }
+        }
+    })
+})
