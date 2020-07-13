@@ -1,3 +1,9 @@
+<script>
+    // 判断本地存储中的token是否存在.如果不存在表示未登录,则跳转到login页面
+    if (localStorage.getItem('token') === null) {
+        location.href = '/login.html'
+    }
+</script>
 <!DOCTYPE html>
 <html>
 
@@ -19,7 +25,7 @@
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
                     <a href="javascript:;">
-                        <span class="text-avatar">H</span>
+                        <span class="text-avatar"></span>
                         <img src="http://t.cn/RCzsdCq" class="layui-nav-img">个人中心
                     </a>
                     <dl class="layui-nav-child">
@@ -28,7 +34,7 @@
                         <dd><a href="">重置密码</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href=""><i class="layui-icon layui-icon-logout"></i>退出</a></li>
+                <li class="layui-nav-item"><a href="javascript:;" id="logout"><i class="layui-icon layui-icon-logout"></i>退出</a></li>
             </ul>
         </div>
 
@@ -36,9 +42,9 @@
             <div class="layui-side-scroll">
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
                 <div id="user">
-                    <span class="text-avatar">H</span>
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> 欢迎你
-                    <span class="uesrname">贺贺贺</span>
+                    <span class="text-avatar"></span>
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">欢迎你
+                    <span class="uesrname"></span>
                 </div>
                 <ul class="layui-nav layui-nav-tree" lay-filter="test" lay-shrink="all">
                     <li class="layui-nav-item layui-this"><a href=""><i class="layui-icon layui-icon-home"></i>首页</a></li>
@@ -81,6 +87,10 @@
 
         });
     </script>
+
+    <script src="/assets/lib/jquery.js"></script>
+    <script src="/assets/js/common.js"></script>
+    <script src="/assets/js/index.js"></script>
 </body>
 
 </html>
